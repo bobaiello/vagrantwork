@@ -108,4 +108,17 @@ Vagrant.configure("2") do |config|
       v.customize ["modifyvm", :id, "--name", "db"]
     end
   end
+  config.vm.define "app" do |app|
+    app.vm.box = "ubuntu/precise64"
+    app.vm.hostname = 'app'
+    app.vm.box_url = "ubuntu/precise64"
+
+    app.vm.network :private_network, ip: "192.168.56.103"
+
+    app.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 1024]
+      v.customize ["modifyvm", :id, "--name", "app"]
+    end
+  end
 end
