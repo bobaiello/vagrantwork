@@ -6,12 +6,12 @@ This repo shows the steps to get Vagrant up and running to support our example
 code for learning Ansible.
 
 Use the Vagrantfile (shown below) and run
-$ vagrant up
+`$ vagrant up`
 
-Then you can
-$ vagrant ssh ansctl
+Then you can access the node from which we will run ansible playbooks.
+`$ vagrant ssh ansctl`
 
-To update node with ansible
+You will need to install ansible (vagrant enthusiasts will want to use provisioning)
 ```
 $ sudo apt-get update
 $ sudo apt-get install software-properties-common
@@ -19,7 +19,7 @@ $ sudo apt-add-repository ppa:ansible/ansible
 $ sudo apt-get update
 $ sudo apt-get install ansible
 ```
-Below is the Vagrantfile we used to get started:
+Below is the Vagrantfile we used to get started (which also defined a web, db and app server):
 
 ```
 # -*- mode: ruby -*-
