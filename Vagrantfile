@@ -6,13 +6,18 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |config|
+  # config.vm.network "public_network"
+
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "ubuntu/precise64"
+  # config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.network "forwarded_port", guest: 9990, host: 9990
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -67,26 +72,28 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
-  config.vm.define "ansctl" do |ansctl|
-    ansctl.vm.box = "ubuntu/precise64"
-    ansctl.vm.hostname = 'ansctl'
-    ansctl.vm.box_url = "ubuntu/precise64"
-
-    ansctl.vm.network :private_network, ip: "192.168.56.100"
-
-    ansctl.vm.provider :virtualbox do |v|
-      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.customize ["modifyvm", :id, "--memory", 1024]
-      v.customize ["modifyvm", :id, "--name", "ansctl"]
-    end
-  end
+  # config.vm.define "ansctl" do |ansctl|
+  #   ansctl.vm.box = "ubuntu/trusty64"
+  #   ansctl.vm.hostname = 'ansctl'
+  #   ansctl.vm.box_url = "ubuntu/trusty64"
+  #
+  #   ansctl.vm.network :public_network, ip: "192.168.56.100"
+  #
+  #   ansctl.vm.provider :virtualbox do |v|
+  #     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  #     v.customize ["modifyvm", :id, "--memory", 1024]
+  #     v.customize ["modifyvm", :id, "--name", "ansctl"]
+  #   end
+  # end
 
   config.vm.define "web" do |web|
-    web.vm.box = "ubuntu/precise64"
+    web.vm.box = "ubuntu/trusty64"
     web.vm.hostname = 'web'
-    web.vm.box_url = "ubuntu/precise64"
+    web.vm.box_url = "ubuntu/trusty64"
 
-    web.vm.network :private_network, ip: "192.168.56.101"
+    web.vm.network :public_network, ip: "192.168.100.101"
+    web.vm.network "forwarded_port", guest: 9990, host: 9990
+    web.vm.network "forwarded_port", guest: 8080, host: 8080
 
     web.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
@@ -95,30 +102,30 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.define "db" do |db|
-    db.vm.box = "ubuntu/precise64"
-    db.vm.hostname = 'db'
-    db.vm.box_url = "ubuntu/precise64"
-
-    db.vm.network :private_network, ip: "192.168.56.102"
-
-    db.vm.provider :virtualbox do |v|
-      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.customize ["modifyvm", :id, "--memory", 512]
-      v.customize ["modifyvm", :id, "--name", "db"]
-    end
-  end
-  config.vm.define "app" do |app|
-    app.vm.box = "ubuntu/precise64"
-    app.vm.hostname = 'app'
-    app.vm.box_url = "ubuntu/precise64"
-
-    app.vm.network :private_network, ip: "192.168.56.103"
-
-    app.vm.provider :virtualbox do |v|
-      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.customize ["modifyvm", :id, "--memory", 1024]
-      v.customize ["modifyvm", :id, "--name", "app"]
-    end
-  end
+  # config.vm.define "db" do |db|
+  #   db.vm.box = "ubuntu/trusty64"
+  #   db.vm.hostname = 'db'
+  #   db.vm.box_url = "ubuntu/trusty64"
+  #
+  #   db.vm.network :public_network, ip: "192.168.56.102"
+  #
+  #   db.vm.provider :virtualbox do |v|
+  #     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  #     v.customize ["modifyvm", :id, "--memory", 512]
+  #     v.customize ["modifyvm", :id, "--name", "db"]
+  #   end
+  # end
+  # config.vm.define "app" do |app|
+  #   app.vm.box = "ubuntu/trusty64"
+  #   app.vm.hostname = 'app'
+  #   app.vm.box_url = "ubuntu/trusty64"
+  #
+  #   app.vm.network :public_network, ip: "192.168.56.103"
+  #
+  #   app.vm.provider :virtualbox do |v|
+  #     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  #     v.customize ["modifyvm", :id, "--memory", 1024]
+  #     v.customize ["modifyvm", :id, "--name", "app"]
+  #   end
+  # end
 end
