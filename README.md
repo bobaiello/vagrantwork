@@ -1,6 +1,6 @@
 ## Bob Aiello,
-## CM Best Practices Consulting (www.cmbestpractices.com)
-## http://www.linkedin.com/in/BobAiello
+### CM Best Practices Consulting (www.cmbestpractices.com)
+### http://www.linkedin.com/in/BobAiello
 
 Prerequisite - install VirtualBox and Vagrant
 
