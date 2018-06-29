@@ -2,6 +2,15 @@
 ## CM Best Practices Consulting (www.cmbestpractices.com)
 ## http://www.linkedin.com/in/BobAiello
 
+Prerequisite - install VirtualBox and Vagrant 
+
+Download VirtualBox
+https://www.virtualbox.org/wiki/Downloads
+
+Download Vagrant
+https://www.vagrantup.com/downloads.html
+
+
 This repo shows the steps to get Vagrant up and running to support our example
 code for learning Ansible.
 
