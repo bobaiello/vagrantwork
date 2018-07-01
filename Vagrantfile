@@ -1,4 +1,4 @@
-# -*- mode: ruby -*-
+0# -*- mode: ruby -*-
 # vi: set ft=ruby :
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
@@ -16,8 +16,10 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   # config.vm.box = "ubuntu/trusty64"
   config.vm.box = "ubuntu/trusty64"
-  config.vm.network "forwarded_port", guest: 9990, host: 9990
-  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  config.vm.network "forwarded_port", guest: 9990, host: 9990,
+      auto_correct: true
+  config.vm.network "forwarded_port", guest: 8080, host: 8080,
+      auto_correct: true
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -78,7 +80,8 @@ Vagrant.configure("2") do |config|
     ansctl.vm.box_url = "ubuntu/trusty64"
 
     ansctl.vm.network :public_network, ip: "192.168.100.100"
-    ansctl.vm.network "forwarded_port", guest: 8080, host: 8080
+    ansctl.vm.network "forwarded_port", guest: 8080, host: 8080,
+        auto_correct: true
     ansctl.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--memory", 1024]
@@ -92,8 +95,10 @@ Vagrant.configure("2") do |config|
     web.vm.box_url = "ubuntu/trusty64"
 
     web.vm.network :public_network, ip: "192.168.100.101"
-    web.vm.network "forwarded_port", guest: 9990, host: 9992
-    web.vm.network "forwarded_port", guest: 8080, host: 8082
+    web.vm.network "forwarded_port", guest: 9990, host: 9990,
+        auto_correct: true
+    web.vm.network "forwarded_port", guest: 8080, host: 8080,
+        auto_correct: true
 
     web.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
